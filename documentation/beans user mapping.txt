@@ -1,0 +1,4 @@
+- as availability setter I want supplier lists uploaded so I can then make decisions on what is made available to members
+	- I want to slice available items several ways to enable swift decisions on what to cull
+	- I want each 'cull' choice to be a one-click operation to save time
+	- I want each 'cull' choice to be optionally automated to cut down on repetitive work
