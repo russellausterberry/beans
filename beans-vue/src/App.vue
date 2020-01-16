@@ -1,35 +1,33 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <app-navbar></app-navbar>
-    <app-body></app-body>
-    <app-footer></app-footer>
+    <Header></Header>
   </div>
 </template>
 
 <script>
-import Header from './shared/Header'
-import Navbar from './shared/Navbar'
-import Body from './shared/Body'
-import Footer from './shared/Footer'
+import Header from "./shared/Header.vue";
 
 export default {
+  name: "app",
   components: {
-    'app-header': Header,
-    'app-navbar': Navbar,
-    'app-body': Body,
-    'app-footer': Footer
+    Header
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  // ===================== Regarding Bulma ====================
+  //
+  // to make Bulma (css framework) play well with Vue:
+  // 1. install vue
+  // 2. "vue create [project name]"
+  // 3. cli preferences: Babel, linter, CSS Pre-processors (SCSS/SASS), dedicated files
+  // 4. "npm install bulma"
+  // 5. "npm run serve" (check project is up)
+  // 6. add '@import "~bulma/css/bulma.css";' to this <style> tag
+  // 7. add html with Bulma classes to confirm working
+  // 5. remove this <style> tag, add 'main.scss' to assets folder, with line 'import "~bulma/bulma"
+  // 6. in main.js add line 'require("./assets/main.scss")
+  // 10. confirm Bulma still works
+  //
 </style>

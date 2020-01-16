@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Happy+Monkey&display=swap');
+// // Set your brand colors
+// $purple: #FA7C91;
+// $pink: #FA7C91;
+// $brown: #757763;
+// $beige-light: #D0D1CD;
+// $beige-lighter: #EFF0EB;
+
+// // Update Bulma's global variables
+$family-code: "Happy Monkey", cursive;
+// $grey-dark: $brown;
+// $grey-light: $beige-light;
+// $primary: $purple;
+// $link: $pink;
+
+// // Update some of Bulma's component variables
+// $control-border-width: 2px;
+// $input-background-color: $beige-lighter;
+// $input-border-color: transparent;
+// $input-shadow: none;
+
+$body-background-colour: fuchsia;
+
+@import '~bulma/bulma';
