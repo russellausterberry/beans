@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Navbar></Navbar>
+    <MakeAvailable></MakeAvailable>
   </div>
 </template>
 
 <script>
-import Header from "./shared/Header.vue";
+import Navbar from "./shared/Nav";
+import MakeAvailable from "./features/make-available/MakeAvailable";
 
 export default {
   name: "app",
   components: {
-    Header
+    Navbar,
+    MakeAvailable
   }
 };
 </script>
