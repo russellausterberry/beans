@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bulma": "^0.8.0",
+    "bulma-o-steps": "^1.0.9",
     "core-js": "^3.4.4",
     "vue": "^2.6.10"
   },
