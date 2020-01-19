@@ -6,9 +6,8 @@
 </template>
 
 <script>
-import Navbar from "./shared/Nav";
-import MakeAvailable from "./features/make-available/MakeAvailable";
-
+import Navbar from "./shared/Header";
+import MakeAvailable from "./features/MakeAvailable";
 export default {
   name: "app",
   components: {
@@ -27,7 +26,6 @@ export default {
   // 3. cli preferences: Babel, linter, CSS Pre-processors (SCSS/SASS), dedicated files
   // 4. "npm install bulma"
   // 5. "npm run serve" (check project is up)
-  // 6. add '@import "~bulma/css/bulma.css";' to this <style> tag
   // 7. add html with Bulma classes to confirm working
   // 5. remove this <style> tag, add 'main.scss' to assets folder, with line 'import "~bulma/bulma"
   // 6. in main.js add line 'require("./assets/main.scss")

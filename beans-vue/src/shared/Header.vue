@@ -1,3 +1,4 @@
+
 <template>
   <nav class="navbar is-info" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">

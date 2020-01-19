@@ -25,21 +25,20 @@
 </template>
 
 <script>
-import SelectSupplier from "./SelectSupplier"
-import MapFields from "./MapFields"
-import SkipItems from "./SkipItems"
-import SplitItems from "./SplitItems"
-import AddCategories from "./AddCategories"
-import CullSelection from "./CullSelection"
-
-export default {
-  components: {
-    SelectSupplier,
-    MapFields,
-    SkipItems,
-    SplitItems,
-    AddCategories,
-    CullSelection
-  }
-}
+// import SelectSupplier from "./SelectSupplier"
+// import MapFields from "./MapFields"
+// import SkipItems from "./SkipItems"
+// import SplitItems from "./SplitItems"
+// import AddCategories from "./AddCategories"
+// import CullSelection from "./CullSelection"
+// export default {
+//   components: {
+//     SelectSupplier,
+//     MapFields,
+//     SkipItems,
+//     SplitItems,
+//     AddCategories,
+//     CullSelection
+//   }
+// }
 </script>
