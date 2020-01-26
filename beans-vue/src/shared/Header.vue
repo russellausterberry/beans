@@ -5,13 +5,14 @@
       <a class="navbar-item">
         <img src="../assets/beanslogo.png" alt="beans logo" />
       </a>
-      <!-- to do: hook 'is-active' toggle to navbar-menu, controlled by clicking burger -->
       <a
+        ref="burger"
         class="navbar-burger"
         role="button"
         aria-label="menu"
         aria-expanded="false"
         data-target="beansNavBar"
+        @click="burgerExpanded=!burgerExpanded"
       >
         <!-- 3 empty spans to show 'hamburger' -->
         <span aria-hidden="true"></span>
@@ -20,8 +21,11 @@
       </a>
     </div>
 
-    <!-- to do: hook 'is-active' toggle to navbar-menu, controlled by clicking burger -->
-    <div id="beansNavBar" class="navbar-menu">
+    <div 
+      id="beansNavBar" 
+      class="navbar-menu" 
+      v-bind:class="{'is-active': burgerExpanded}"  
+    >
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">order cycle</a>
@@ -52,5 +56,11 @@
 </template>
 
 <script>
-export default {};
+  export default {
+    data: function(){
+      return {
+        burgerExpanded: false
+      }
+    }
+  };
 </script>
