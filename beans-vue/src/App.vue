@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from "./shared/Header";
-import MakeAvailable from "./features/MakeAvailable";
+import MakeAvailable from "./features/make-available/MakeAvailable";
 export default {
   name: "app",
   components: {
