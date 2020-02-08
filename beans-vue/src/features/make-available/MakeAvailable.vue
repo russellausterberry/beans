@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Steps @currentStepChanged="currentComponent=$event"></Steps>
+    <transition name="steps" appear>
+      <Steps @currentStepChanged="currentComponent=$event"></Steps>
+    </transition>
+    
     <keep-alive>
       <component :is="currentComponent"></component>
     </keep-alive>
@@ -35,3 +38,14 @@
     }
   };
 </script>
+
+<style scoped>
+  .steps-enter {
+    opacity: 0;
+  }
+
+  .steps-enter-active {
+    transition: opacity 1.5s;
+  }
+
+</style>

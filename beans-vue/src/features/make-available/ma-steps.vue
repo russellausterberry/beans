@@ -22,12 +22,12 @@
           v-bind:key="step" 
           v-for="step in steps"
           class="steps-segment"
-          v-bind:class="{'is-active':step.stepData.stepActive}"
+          v-bind:class="{'is-active':step.details.stepActive}"
           >
-          <span class="steps-marker">{{ step.stepData.stepMarker }}</span>
+          <span class="steps-marker">{{ step.details.stepMarker }}</span>
           <div class="steps-content">
-            <p class="subtitle is-5" v-bind:class="{'has-text-grey-light':!step.stepData.stepActive}">{{ step.stepData.stepName }}</p>
-            <p v-bind:class="{'is-size-7 has-text-grey-light':!step.stepData.stepActive}">{{ step.stepData.stepInfo }}</p>
+            <p class="subtitle is-5" v-bind:class="{'has-text-grey-light':!step.details.stepActive}">{{ step.details.stepName }}</p>
+            <p v-bind:class="{'is-size-7 has-text-grey-light':!step.details.stepActive}">{{ step.details.stepInfo }}</p>
           </div>          
         </li>
       </ul>
@@ -48,49 +48,49 @@
         currentStep: 1,      // 1 correlates to step 1, etc
         stepsVisible: true,  // controls visibility of entire steps component
         steps: [             // data for each of the steps
-          { stepData: {
+          { details: {
             stepMarker: 1,
             stepName: "Supplier",
             stepActive: true,
             stepInfo: "Choose supplier to set availability for"
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 2,
             stepName: "Method",
             stepActive: false,
             stepInfo: "Choose whether to import from supplier or change manually"            
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 3,
             stepName: "Map",
             stepActive: false,
             stepInfo: "If needed, map supplier fields to 'beans' fields"
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 4,
             stepName: "Skip",
             stepActive: false,
             stepInfo: "If needed select which items to skip by default"
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 5,
             stepName: "Split",
             stepActive: false,
             stepInfo: "Drag the words of each item into relevant box"
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 6,
             stepName: "Sift",
             stepActive: false,
             stepInfo: "Add categories"
             }
           },
-          { stepData: {
+          { details: {
             stepMarker: 7,
             stepName: "Cull",
             stepActive: false,
@@ -103,20 +103,22 @@
     methods: {
       next(pos) {
         if (pos < this.steps.length) { 
-          pos--;           
-          this.steps[pos].stepData.stepActive = false;     // reset current step
-          this.steps[pos+1].stepData.stepActive = true;    // activate next step
-          this.currentStep++;                              // increment
-          this.$emit('currentStepChanged', this.steps[pos+1].stepData.stepName); 
+          // translate 'pos' to 0-based index for array   
+          pos--;                                                 
+          this.steps[pos].details.stepActive = false;
+          this.steps[pos+1].details.stepActive = true;
+          this.currentStep++;
+          this.$emit('currentStepChanged', this.steps[pos+1].details.stepName); 
         }         
       },
       previous(pos) {
         if (pos > 1) { 
-          pos--;           
-          this.steps[pos].stepData.stepActive = false;     // reset current step
-          this.steps[pos-1].stepData.stepActive = true;    // activate next step
-          this.currentStep--;                              // decrement
-          this.$emit('currentStepChanged', this.steps[pos-1].stepData.stepName); 
+          pos--;
+          // translate 'pos' to 0-based index for array              
+          this.steps[pos].details.stepActive = false;
+          this.steps[pos-1].details.stepActive = true;
+          this.currentStep--;
+          this.$emit('currentStepChanged', this.steps[pos-1].details.stepName); 
         }   
       }
     }    
