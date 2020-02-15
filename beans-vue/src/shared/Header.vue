@@ -27,11 +27,11 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">order cycle</a>
             <div class="navbar-dropdown">
-              <router-link :to="{ name: 'makeAvailable'}" class="navbar-item">Make available</router-link>
-              <router-link :to="{ name: 'orderSupplies'}" class="navbar-item">Order Supplies</router-link>
-              <router-link :to="{ name: 'printSheets'}" class="navbar-item">Print Sheets</router-link>
-              <router-link :to="{ name: 'adjustOrders'}" class="navbar-item">Adjust Orders</router-link>
-              <router-link :to="{ name: 'enterPayments'}" class="navbar-item">Enter Payments</router-link>
+              <router-link :to="'/order-cycle/make-available'" class="navbar-item">Make available</router-link>
+              <router-link :to="'/order-cycle/order-supplies'" class="navbar-item">Order Supplies</router-link>
+              <router-link :to="'/order-cycle/print-sheets'" class="navbar-item">Print Sheets</router-link>
+              <router-link :to="'/order-cycle/adjust-orders'" class="navbar-item">Adjust Orders</router-link>
+              <router-link :to="'/order-cycle/enter-payments'" class="navbar-item">Enter Payments</router-link>
             </div>
           </div>   
 

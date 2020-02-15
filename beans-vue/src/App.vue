@@ -2,6 +2,7 @@
   <div id="app">
     <router-view name="header"></router-view>
     <router-view name="home"></router-view>
+    <router-view name="orderCycle"></router-view>
     <router-view name="makeAvailable"></router-view>
     <router-view name="orderSupplies"></router-view>
     <router-view name="printSheets"></router-view>
