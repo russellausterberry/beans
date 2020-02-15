@@ -17,34 +17,49 @@ export const routes = [{
     path: '',
     name: 'home',
     components: {
-      home: Home,
-      header: Header
+      header: Header,
+      home: Home
     }
   },
   {
     path: '/make-available',
     name: 'makeAvailable',
-    component: MakeAvailable
+    components: {
+      header: Header,
+      makeAvailable: MakeAvailable
+    } 
   },
   {
     path: '/order-supplies',
     name: 'orderSupplies',
-    component: OrderSupplies
+    components: {
+      header: Header,
+      orderSupplies: OrderSupplies 
+    }
   },
   {
     path: '/print-sheets',
     name: 'printSheets',
-    component: PrintSheets
+    components: {
+      header: Header,
+      printSheets: PrintSheets 
+    }
   },
   {
     path: '/adjust-orders',
     name: 'adjustOrders',
-    component: AdjustOrders
+    components: {
+      header: Header,
+      adjustOrders: AdjustOrders 
+    }
   },
   {
     path: '/enter-payments',
     name: 'enterPayments',
-    component: EnterPayments
+    components: {
+      header: Header,
+      enterPayments: EnterPayments 
+    }
   }
 
   // { path: '/orders', name:'Orders', component: Orders },

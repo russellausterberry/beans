@@ -1,20 +1,16 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
-    <MakeAvailable></MakeAvailable>
+    <router-view name="header"></router-view>
+    <router-view name="home"></router-view>
+    <router-view name="makeAvailable"></router-view>
+    <router-view name="orderSupplies"></router-view>
+    <router-view name="printSheets"></router-view>
+    <router-view name="adjustOrders"></router-view>
+    <router-view name="enterPayments"></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from "./shared/Header";
-import MakeAvailable from "./features/make-available/ma";
-export default {
-  name: "app",
-  components: {
-    Navbar,
-    MakeAvailable
-  }
-};
 </script>
 
 <style lang="scss">
