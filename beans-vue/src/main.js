@@ -8,6 +8,8 @@ Vue.use(VueRouter)
 
 require("./assets/main.scss");
 
+var PouchDB = require('pouchdb');
+
 const router = new VueRouter({
   routes,
   mode: 'history'

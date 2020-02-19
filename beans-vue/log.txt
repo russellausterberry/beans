@@ -1,0 +1,32 @@
+[Tue, 18 Feb 2020 04:21:23 GMT] [info] [<0.000.0>] pouchdb-server has started on http://127.0.0.1:5984/
+[Tue, 18 Feb 2020 04:21:23 GMT] [info] [<0.000.0>] navigate to http://127.0.0.1:5984/_utils for the Fauxton UI.
+[Tue, 18 Feb 2020 04:21:58 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils 301
+[Tue, 18 Feb 2020 04:21:58 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/ 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/css/styles-a9623008fc27e79da2388441deeacfab.css 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/js/bundle-34997e32896293a1fa5d71f79eb1b4f7.js 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_session 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_session 304
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET / 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/img/pouchdb-site.png 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/fonts/fauxtonicon5.woff 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/img/pouchdb-favicon.png 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_all_dbs?_=1581999719168 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_all_dbs?startkey=%22%22&endkey=%22%E9%A6%99%22&limit=30&_=1581999719169 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_replicator?_=1581999719170 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_users?_=1581999719171 200
+[Tue, 18 Feb 2020 04:21:59 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/fonts/fontawesome-webfont.woff 200
+[Tue, 18 Feb 2020 04:23:27 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /harold 201
+[Tue, 18 Feb 2020 04:23:27 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /harold/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true&limit=501 200
+[Tue, 18 Feb 2020 04:23:27 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /harold/_all_docs?limit=21 200
+[Tue, 18 Feb 2020 04:23:27 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /harold/_all_docs?startkey=%22%22&endkey=%22%E9%A6%99%22&limit=30&_=1581999719172 200
+[Tue, 18 Feb 2020 04:23:27 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/img/couch-watermark.png 200
+[Tue, 18 Feb 2020 04:23:35 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_membership 200
+[Tue, 18 Feb 2020 04:23:35 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_membership 304
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /_node/node1@127.0.0.1/_config/admins/admin 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - POST /_session 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_session 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_all_dbs?_=1581999719173 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_replicator?_=1581999719174 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /harold?_=1581999719176 200
+[Tue, 18 Feb 2020 04:23:54 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_users?_=1581999719175 200
+[Tue, 18 Feb 2020 04:23:56 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /_utils/dashboard.assets/img/pouchdb-favicon.png 304
