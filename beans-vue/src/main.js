@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import PouchDB from 'pouchdb-browser'
 import App from './App.vue'
 import { routes } from './routes'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+let db = new PouchDB('drat');
+console.log(db);
 
 require("./assets/main.scss");
-
-var PouchDB = require('pouchdb');
 
 const router = new VueRouter({
   routes,

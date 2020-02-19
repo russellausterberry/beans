@@ -19,7 +19,7 @@
       <!-- 'make available' steps progress bar -->
       <ul class="steps has-content-centered">
         <li 
-          v-bind:key="step" 
+          v-bind:key="step.id" 
           v-for="step in steps"
           class="steps-segment"
           v-bind:class="{'is-active':step.details.stepActive}"

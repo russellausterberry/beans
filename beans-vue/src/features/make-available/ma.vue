@@ -36,7 +36,10 @@
       Split,
       Sift,
       Cull
-    }
+    },
+    created() {
+      
+    }  
   };
 </script>
 
