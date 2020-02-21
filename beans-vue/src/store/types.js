@@ -1,0 +1,1 @@
+// implement vuex state management as per 'vuex-finished' project

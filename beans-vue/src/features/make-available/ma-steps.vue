@@ -45,6 +45,7 @@
   export default {
     data: function() {
       return {
+        // make available steps data
         currentStep: 1,      // 1 correlates to step 1, etc
         stepsVisible: true,  // controls visibility of entire steps component
         steps: [             // data for each of the steps
