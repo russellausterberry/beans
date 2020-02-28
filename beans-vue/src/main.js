@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VuePapaParse from 'vue-papa-parse'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import VueRouter from 'vue-router'
@@ -8,8 +9,9 @@ import { routes } from './routes'
 
 Vue.config.productionTip = false
 
-Vue.component('v-select', vSelect);
-Vue.use(VueRouter);
+Vue.component('v-select', vSelect)
+Vue.use(VuePapaParse)
+Vue.use(VueRouter)
 
 let db = new PouchDB('drat');
 console.log(db);
