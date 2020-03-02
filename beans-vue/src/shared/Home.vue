@@ -4,3 +4,9 @@
     <p>Some random text regarding Home...</p>
   </div>
 </template>
+
+<script>
+    export default {
+
+    }
+</script>

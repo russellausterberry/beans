@@ -1,0 +1,20 @@
+Beans project
+    Making Available module
+        8 - 16 Feb      Initial routing, step component
+        19 Feb          Create PouchDB server 
+        21 Feb          Draft of 'select supplier' dialog
+        22 - 28 Feb     Import .csv availability
+
+        TO DO
+        Establish CRUD operations PouchDB
+        Map fields & filter the csv import, save to DB
+        Skip files & filter the csv import, save to DB
+        Split step
+        Sift step
+        Cull step
+        Establish CouchDB & syncing
+        Refactor all the above
+        Order module
+        Admin module
+        Integrate finance (Xero etc)
+        Integrate notifications

@@ -1,55 +1,54 @@
 <template>
-  <div>
+<div>
     <transition name="steps" appear>
-      <Steps @currentStepChanged="currentComponent=$event"></Steps>
+        <Steps @currentStepChanged="currentComponent=$event"></Steps>
     </transition>
-    
+
     <keep-alive>
-      <component :is="currentComponent"></component>
+        <!-- show relevant step component -->
+        <component :is="currentComponent"></component>
     </keep-alive>
-  </div>
-  
+</div>
 </template>
 
 <script>
-  import Steps from "./ma-steps"
-  import Supplier from "./ma-supplier"
-  import Method from "./ma-method"
-  import Map from "./ma-map"
-  import Skip from "./ma-skip"
-  import Split from "./ma-split"
-  import Sift from "./ma-sift"
-  import Cull from "./ma-cull"
+import Steps from "./ma-steps"
+import Supplier from "./ma-supplier"
+import Method from "./ma-method"
+import Map from "./ma-map"
+import Skip from "./ma-skip"
+import Split from "./ma-split"
+import Sift from "./ma-sift"
+import Cull from "./ma-cull"
 
-  export default {
-    data: function() {
-      return {
-        currentComponent: "Supplier"
-      }
+export default {
+    data: function () {
+        return {
+            currentComponent: "Supplier"
+        }
     },
     components: {
-      Steps,
-      Supplier,
-      Method,
-      Map,
-      Skip,
-      Split,
-      Sift,
-      Cull
+        Steps,
+        Supplier,
+        Method,
+        Map,
+        Skip,
+        Split,
+        Sift,
+        Cull
     },
     created() {
-      
-    }  
-  };
+       
+    }
+};
 </script>
 
 <style scoped>
-  .steps-enter {
+.steps-enter {
     opacity: 0;
-  }
+}
 
-  .steps-enter-active {
+.steps-enter-active {
     transition: opacity 1.5s;
-  }
-
+}
 </style>
