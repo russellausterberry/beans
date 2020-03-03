@@ -7,48 +7,24 @@ import App from './App.vue'
 import { routes } from './routes'
 import PouchDB from 'pouchdb'
 
-// WORKING: create database, create document, update document, sync to server db
-var db = new PouchDB('testator');
-var remoteCouch = 'http://127.0.0.1:5984/testator';
-console.log(db.name + " created ok");
-console.log(remoteCouch + " .. is just a string");
+const couchPath = 'http://127.0.0.1:5984/';
 
-db.put({
-    _id: "item_1",      /* combo table name & ID */
-    itemName: "banana",
-    description: "long curved yellow delicious herb"
-}).then(function (response) {
-    console.log(response);
-}).catch(function (err) {
-    console.log(err);
-});
+/* eslint-disable */
+// create local & remote dbs for the group
+var CF_admin            = new PouchDB('CF-admin');
+var CF_items            = new PouchDB('CF_items');
+var CF_members          = new PouchDB('CF_members');
+var CF_suppliers        = new PouchDB('CF_suppliers');
+var CF_orders           = new PouchDB('CF_orders');
+var CF_invoices         = new PouchDB('CF_invoices');
 
-db.get('item_1').then(function (doc) {
-    console.log(doc);
-}).catch(function (err) {
-    console.log(err);
-});
-
-db.get('item_1').then(function(doc){
-    return db.put({
-        _id: 'item_1',
-        _rev: doc._rev,
-        description: "simply yummy'"
-    });
-}).then(function(response) {
-    console.log(response);
-}).catch(function(err) {
-    console.log(err);
-});
-
-PouchDB.sync('testator', 'http://127.0.0.1:5984/testator', {
-    live: true,
-    retry: true
-}).on('complete', function (info) {
-    console.log(info);
-}).on('error', function (err) {
-    console.log(err);
-});
+var remote_CF_admin     = couchPath + 'CF_admin';
+var remote_CF_items     = couchPath + 'CF_items';
+var remote_CF_members   = couchPath + 'CF_members';
+var remote_CF_suppliers = couchPath + 'CF_suppliers';
+var remote_CR_orders    = couchPath + 'CF_orders';
+var remote_CF_invoices  = couchPath + 'CF_invoices';
+/* eslint-enable */
 
 Vue.config.productionTip = false
 
@@ -57,7 +33,6 @@ Vue.use(VuePapaParse)
 Vue.use(VueRouter)
 
 require("./assets/main.scss");
-
 
 const router = new VueRouter({
   routes,
