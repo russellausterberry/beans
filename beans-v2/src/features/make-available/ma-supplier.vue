@@ -3,42 +3,56 @@
     <div class="columns">
         <div class="column"></div>
         <div class="column">
-<!--             <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Select supplier to update availability for</p>
-                </header>
-                <div class="card-content control">
-                    <v-select :options="suppliers" v-model="chosenSupplier"></v-select>
+
+            <p>Choose a supplier to set availability for</p>
+            <v-select
+                label="chosenSupplier"
+                :options="suppliers"
+                v-model="chosenSupplier">
+            </v-select>
+            <br>
+
+            <p>Select how to set availability</p>
+            <v-select 
+                :options="['from csv', 'manually']" 
+                v-model="chosenMethod"
+            >from csv</v-select>
+            <br>
+            
+            <div v-if="chosenMethod=='from csv'">
+                <p>Choose a file to upload</p>
+                <input type="file" @change="readFile" />
+                <br>
+            </div>
+         
+            <!-- map fields to import -->
+            <div v-if="fileChosen" class="columns">
+                <div class="column">
+                    <br>
+                    <br>
+                    <h3 class="subtitle">csv fields:</h3>
+                    <ul>
+                        <li
+                            v-for="col in csvColumns"
+                            :key="col.id"
+                        >{{ col }} </li>
+                    </ul>
                 </div>
+
+                <div class="column">
+                    <br>
+                    <br>
+                    <h3 class="subtitle">fields to import to:</h3>
+                    <ul>
+                        <li
+                            v-for="field in productFields"
+                            :key="field.id"
+                        > {{ field }}
+                        </li>
+                    </ul>
+                </div>                
             </div>
-            <br>
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Select how to update:</p>
-                </header>
-                <div class="card-content control">
-                    <v-select :options="['from csv', 'manually']" v-model="chosenMethod"></v-select>
-                </div>
-            </div> -->
-            <br>
-            <br>
-            <div><input type="file" @change="readFile" /> </div> 
-            <br>
-            <div>
-                <h3>.csv fields:</h3>
-                <ul>
-                    <li
-                        v-for="col in csvColumns"
-                        :key="col.id"
-                    >{{ col }} </li>
-                </ul>
-            </div>
-            <br>
-            <br>
-            <div>
-                <h3>.csv items:</h3>
-                {{ csvItems }}
-            </div>
+
     
         </div>
         <div class="column"></div>
@@ -62,7 +76,16 @@ export default {
             chosenSupplier: '',
             chosenMethod: '',
             showColumns: false,
-            testColumns: ['A', 'B', 'C']
+            fileChosen: false,
+            productFields: [
+                'product',
+                'unit',
+                'unitPrice',
+                'gst',
+                'producer',
+                'supplier',
+                'deliveryDate'
+            ]
         };
     },
     methods: {
@@ -80,10 +103,7 @@ export default {
                     }
 
                     self.$store.dispatch('importCSV', payload); 
-
-                    // update availability with results
-                    // update columns with results.meta.fields
-                    // display columns  
+                    self.fileChosen = true;
              
                 }
             });

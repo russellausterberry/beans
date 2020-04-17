@@ -16,13 +16,8 @@ const mutations = {
     },
     // import array of column names, and the .csv object
     'IMPORT_CSV' (state, payload) {
-        console.log('inside IMPORT_CSV mutation');
-        console.log('before assignment, csvColumns is ' + state.csvColumns);
-        console.log('parameter csvColumns is ' + payload.fields);
         state.csvColumns = payload.fields;
         state.itemsToImport = payload.all;
-        console.log('after assignment, csvColumns is ' + state.csvColumns);
-        console.log('1st field: ' + state.csvColumns[0]);
     },
     // reset all
     'CLEAR_CSV_IMPORT' (state) {
@@ -49,7 +44,6 @@ const actions = {
 // or simply functions used to return values from the store
 const getters = {
     csvColumns: state => {
-        console.log('in csvColumns getter; state.csvColumns = ' + state.csvColumns)
         return state.csvColumns
     }
 };
