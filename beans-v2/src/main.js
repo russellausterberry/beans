@@ -8,7 +8,7 @@ import vSelect from 'vue-select'
 // import files
 import App from './App.vue'
 import { routes } from './routes'
-import store from './store'
+import store from './store/store'
 import 'vue-select/dist/vue-select.css'
 
 const couchPath = 'http://127.0.0.1:5984/';

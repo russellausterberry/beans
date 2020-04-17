@@ -24,8 +24,21 @@
             <br>
             <div><input type="file" @change="readFile" /> </div> 
             <br>
-            <!-- TODO: find how to display imported columns once readFile() has completed -->
-            <div>{{ currentAvailability }} </div>
+            <div>
+                <h3>.csv fields:</h3>
+                <ul>
+                    <li
+                        v-for="col in csvColumns"
+                        :key="col.id"
+                    >{{ col }} </li>
+                </ul>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h3>.csv items:</h3>
+                {{ csvItems }}
+            </div>
     
         </div>
         <div class="column"></div>
@@ -48,47 +61,40 @@ export default {
             availability: {},
             chosenSupplier: '',
             chosenMethod: '',
-            showColumns: false
+            showColumns: false,
+            testColumns: ['A', 'B', 'C']
         };
     },
     methods: {
+        // read the chosen .csv file into a JSON structure
         readFile() {
-            console.log('entering readFile(), cols is ' + this.cols);
             var file = event.target.files[0];
-            this.$papa.parse(file, {
+            var self = this;
+            
+            this.$papa.parse(file, {    // config object, containing callback
                 header: true,
-                complete: function (results) {
-                    console.log('inside complete promise; cols is ' + this.cols);
-
-                    this.$store.dispatch('importCSV', results.meta.fields, results);
-
-                    this.availability = results;
-                    console.log('inside complete promise: availability updated to: ' + this.availability);
-
-                    this.cols = results.meta.fields;
-                    console.log('inside complete promise; updated cols is: ' + this.cols);
-
-                    var col;
-                    for (col of this.cols) {
-                        console.log(col);
+                complete: function (results) {      // callback to execute when parsing completed
+                    const payload = {
+                        fields: results.meta.fields,
+                        all: results
                     }
 
-                    console.log(results.meta.fields);
-                    console.log(results.meta.fields[0])
-                    console.log(results.data[13].PRODUCT);
-                    console.log('type of var ' + typeof(this.cols));
-                    this.showColumns = true; 
-                    console.log('showColumns is ' + this.showColumns);                   
+                    self.$store.dispatch('importCSV', payload); 
+
+                    // update availability with results
+                    // update columns with results.meta.fields
+                    // display columns  
+             
                 }
             });
-
-            console.log('Initial cols: ' + this.cols);
-   
         }
     },
     computed: {
-        currentAvailability () {
-            return this.$store.csvItems
+        csvItems () {
+            return this.$store.state.csvItems;
+        },
+        csvColumns () {
+            return this.$store.getters.csvColumns;
         }
     }
 };
