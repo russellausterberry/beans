@@ -5,6 +5,7 @@ import PouchDB from 'pouchdb'
 import VuePapaParse from 'vue-papa-parse'
 import vSelect from 'vue-select'
 
+
 // import files
 import App from './App.vue'
 import { routes } from './routes'

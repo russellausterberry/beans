@@ -31,37 +31,62 @@
                     <br>
                     <br>
                     <h3 class="subtitle">csv fields:</h3>
-                    <ul>
+                    <!-- <ul>
                         <li
                             v-for="col in csvColumns"
                             :key="col.id"
                         >{{ col }} </li>
-                    </ul>
+                    </ul> -->
+                    <draggable
+                        v-model="csvColumns"
+                        group="lists"
+                        >
+                            <div
+                                v-for="field in csvColumns"
+                                :key="field">
+                                    {{ field }}
+                            </div>
+                    </draggable>                    
                 </div>
 
                 <div class="column">
                     <br>
                     <br>
                     <h3 class="subtitle">fields to import to:</h3>
-                    <ul>
+                    <!-- <ul>
                         <li
-                            v-for="field in productFields"
-                            :key="field.id"
-                        > {{ field }}
+                            v-for="(value, name) in productFields"
+                            :key="name.id"
+                        > 
+                            <span>
+                                <span>{{ name }} : </span>
+                                <span class="tag is-primary is-light">{{ value }}</span>
+                            </span>
+                            
                         </li>
-                    </ul>
-                </div>                
+                    </ul> -->
+                    <draggable
+                        v-model="productFields" 
+                        group="lists"
+                        >
+                            <div
+                                v-for="field in productFields"
+                                :key="field">
+                                {{ field }}
+                            </div>
+                    </draggable>
+                </div>   
+           
             </div>
-
-    
         </div>
         <div class="column"></div>
-    </div>
-
+    </div>  
 </div>
 </template>
 
-<script>
+<script >
+import draggable from 'vuedraggable'
+
 export default {
     data: function () {
         return {
@@ -78,6 +103,7 @@ export default {
             showColumns: false,
             fileChosen: false,
             productFields: [
+
                 'product',
                 'unit',
                 'unitPrice',
@@ -113,9 +139,17 @@ export default {
         csvItems () {
             return this.$store.state.csvItems;
         },
-        csvColumns () {
-            return this.$store.getters.csvColumns;
+        csvColumns: {
+            get() {
+                return this.$store.getters.csvColumns;
+            },
+            set(value) {
+                this.$store.dispatch('updateCsvColumns', value)
+            }            
         }
+    },
+    components: {
+        draggable
     }
 };
 </script>

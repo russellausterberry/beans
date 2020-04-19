@@ -25,6 +25,9 @@ const mutations = {
         state.updateMethod = '';
         state.csvColumns = [];
         state.itemsToImport = {};
+    },
+    'UPDATE_CSV_COLUMNS' (state, payload) {
+        state.csvColumns=payload;
     }
 };
 // actions may be asynchronous
@@ -37,6 +40,9 @@ const actions = {
     },
     clearCsvImport: ({commit}) => {
         commit('CLEAR_CSV_IMPORT');
+    },
+    updateCsvColumns: ({commit}, payload) => {
+        commit('UPDATE_CSV_COLUMNS', payload);
     }
 };
 
