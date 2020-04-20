@@ -24,68 +24,108 @@
                 <input type="file" @change="readFile" />
                 <br>
             </div>
-         
-            <!-- map fields to import -->
-            <div v-if="fileChosen" class="columns">
-                <div class="column">
-                    <br>
-                    <br>
-                    <h3 class="subtitle">csv fields:</h3>
-                    <!-- <ul>
-                        <li
-                            v-for="col in csvColumns"
-                            :key="col.id"
-                        >{{ col }} </li>
-                    </ul> -->
-                    <draggable
-                        v-model="csvColumns"
-                        group="lists"
-                        >
-                            <div
-                                v-for="field in csvColumns"
-                                :key="field">
-                                    {{ field }}
-                            </div>
-                    </draggable>                    
-                </div>
+        </div>
+        <div class="column"></div>                  
+    </div>
 
-                <div class="column">
-                    <br>
-                    <br>
-                    <h3 class="subtitle">fields to import to:</h3>
-                    <!-- <ul>
-                        <li
-                            v-for="(value, name) in productFields"
-                            :key="name.id"
-                        > 
-                            <span>
-                                <span>{{ name }} : </span>
-                                <span class="tag is-primary is-light">{{ value }}</span>
-                            </span>
-                            
-                        </li>
-                    </ul> -->
-                    <draggable
-                        v-model="productFields" 
-                        group="lists"
-                        >
-                            <div
-                                v-for="field in productFields"
-                                :key="field">
-                                {{ field }}
-                            </div>
-                    </draggable>
-                </div>   
-           
+    <!-- map fields to import -->
+    <div v-if="fileChosen" class="columns">
+        <div class="column is-one-fifth">
+            <br>
+            <br>
+            <h3 class="subtitle">csv fields:</h3>
+            
+            <!-- listing via v-for
+            <ul>
+                <li
+                    v-for="col in csvColumns"
+                    :key="col.id"
+                >{{ col }} </li>
+            </ul> -->
+
+            <!-- drag'n'drop via VueDraggable -->
+<!--                     <draggable
+                v-model="csvColumns"
+                group="lists"
+                >
+                    <div
+                        v-for="field in csvColumns"
+                        :key="field">
+                            {{ field }}
+                    </div>
+            </draggable>     -->     
+
+            <!-- drag-n-drop via VueDragDrop -->
+            <div>
+                <drag v-for="col in csvColumns"
+                    :key="col"
+                    :transfer-data="{ col, example: 'csvColumns' }"
+                    @dragstart="dragging = col"
+                    @dragend="dragging = null"
+                    class="card">
+                        <span class="card-footer-item to-map">{{ col }}</span>
+                </drag>
             </div>
         </div>
-        <div class="column"></div>
-    </div>  
+
+        <div class="column">
+            <br>
+            <br>
+            <h3 class="subtitle">fields to import to:</h3>
+            
+            <!-- listing via v-for
+            <ul>
+                <li
+                    v-for="(value, name) in productFields"
+                    :key="name.id"
+                > 
+                    <span>
+                        <span>{{ name }} : </span>
+                        <span class="tag is-primary is-light">{{ value }}</span>
+                    </span>
+                    
+                </li>
+            </ul> -->
+
+            <!-- drag-n-drop via VueDraggable -->
+    <!--                     <draggable
+                v-model="productFields" 
+                group="lists"
+                >
+                    <div
+                        v-for="field in productFields"
+                        :key="field">
+                        {{ field }}
+                    </div>
+            </draggable> -->
+
+            <!-- drag-n-drop via VueDragDrop -->
+            <div class="card">
+                <div v-for="field in mappedFields"
+                    :key="field[0]"
+                    class="card-footer"
+                    >
+                    <span class="card-footer-item to-map">
+                        {{ field[0] }}
+                    </span>
+                    <span class="card-footer dropster">
+                        <drop v-for="mapped in field[1]"
+                            :key="mapped"
+                            :class="{ allowed: dragging === mapped }"
+                            class="tag is-info"
+                            @drop="handleDrop">
+                                {{ mapped }}
+                        </drop>   
+                    </span>
+                </div>  
+            </div>
+        </div>   
+    </div> 
 </div>
 </template>
 
 <script >
-import draggable from 'vuedraggable'
+// import draggable from 'vuedraggable'
 
 export default {
     data: function () {
@@ -102,6 +142,7 @@ export default {
             chosenMethod: '',
             showColumns: false,
             fileChosen: false,
+            dragging: null,
             productFields: [
 
                 'product',
@@ -111,6 +152,16 @@ export default {
                 'producer',
                 'supplier',
                 'deliveryDate'
+            ],
+            mappedFields: [
+
+                ['product', []],
+                ['unit', ['french fries', 'potato chips']],
+                ['unitPrice', ['unify']],
+                ['gst', []],
+                ['producer', []],
+                ['supplier', []],
+                ['deliveryDate', []]
             ]
         };
     },
@@ -133,6 +184,9 @@ export default {
              
                 }
             });
+        },
+        handleDrop(data) {
+            alert('You dropped with data: ' + data);
         }
     },
     computed: {
@@ -149,10 +203,18 @@ export default {
         }
     },
     components: {
-        draggable
+        // draggable
     }
 };
 </script>
 
-<style lang="">
+<style scoped>
+    .to-map {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .dropster {
+        width: 60%;
+    }
 </style>

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import PouchDB from 'pouchdb'
 import VuePapaParse from 'vue-papa-parse'
 import vSelect from 'vue-select'
-
+import VueDragDrop from 'vue-drag-drop'
 
 // import files
 import App from './App.vue'
@@ -36,6 +36,7 @@ Vue.config.productionTip = false
 Vue.component('v-select', vSelect)
 Vue.use(VuePapaParse)
 Vue.use(VueRouter)
+Vue.use(VueDragDrop)
 
 require("./assets/main.scss");
 
