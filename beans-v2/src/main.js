@@ -5,12 +5,12 @@ import PouchDB from 'pouchdb'
 import VuePapaParse from 'vue-papa-parse'
 import vSelect from 'vue-select'
 import VueDragDrop from 'vue-drag-drop'
+import VueMultiSelect from 'vue-simple-multi-select'
 
 // import files
 import App from './App.vue'
 import { routes } from './routes'
 import store from './store/store'
-import 'vue-select/dist/vue-select.css'
 
 const couchPath = 'http://127.0.0.1:5984/';
 
@@ -34,6 +34,7 @@ var remote_CF_invoices  = couchPath + 'CF_invoices';
 Vue.config.productionTip = false
 
 Vue.component('v-select', vSelect)
+Vue.component('vue-multi-select', VueMultiSelect)
 Vue.use(VuePapaParse)
 Vue.use(VueRouter)
 Vue.use(VueDragDrop)
