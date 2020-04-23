@@ -1,17 +1,25 @@
 // import packages
 import Vue from 'vue'
+import App from './App'
 import VueRouter from 'vue-router'
 import PouchDB from 'pouchdb'
 import VuePapaParse from 'vue-papa-parse'
 import vSelect from 'vue-select'
 import VueDragDrop from 'vue-drag-drop'
+import VueSingleSelect from 'vue-single-select'
 import VueMultiSelect from 'vue-simple-multi-select'
 
 // import files
-import App from './App.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { Datetime } from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
+
+library.add( fas )
+
 import { routes } from './routes'
 import store from './store/store'
-
 const couchPath = 'http://127.0.0.1:5984/';
 
 /* eslint-disable */
@@ -34,7 +42,11 @@ var remote_CF_invoices  = couchPath + 'CF_invoices';
 Vue.config.productionTip = false
 
 Vue.component('v-select', vSelect)
+Vue.component('vue-single-select', VueSingleSelect)
 Vue.component('vue-multi-select', VueMultiSelect)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('datetime', Datetime)
+
 Vue.use(VuePapaParse)
 Vue.use(VueRouter)
 Vue.use(VueDragDrop)
@@ -46,6 +58,7 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+/* eslint-disable no-new */
 new Vue({
   router,
   store,    /* inject store instance to all child components */

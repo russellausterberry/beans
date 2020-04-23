@@ -32,11 +32,11 @@
     <div v-if="fileChosen">
         <div v-for="(field, index) in mappedFields"
             :key="field[0]">
-            <span>{{ field[0] }}: {{ field[1] }}</span>
             <vue-multi-select
                 v-model="mappedFields[index][1]"
                 :options="csvColumns">
-            </vue-multi-select>                
+            </vue-multi-select>
+            <span>{{ field[0] }}</span>                            
         </div>
 
     </div>

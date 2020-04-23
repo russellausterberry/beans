@@ -5,7 +5,7 @@
     </transition>
 
     <keep-alive>
-        <!-- show relevant step component -->
+        <!-- show relevant step -->
         <component :is="currentComponent"></component>
     </keep-alive>
 </div>
@@ -13,9 +13,7 @@
 
 <script>
 import Steps from "./ma-steps"
-import Supplier from "./ma-supplier"
-import Method from "./ma-method"
-import Map from "./ma-map"
+import Prepare from "./ma-prepare"
 import Skip from "./ma-skip"
 import Split from "./ma-split"
 import Sift from "./ma-sift"
@@ -24,14 +22,12 @@ import Cull from "./ma-cull"
 export default {
     data: function () {
         return {
-            currentComponent: "Supplier"
+            currentComponent: "Prepare"
         }
     },
     components: {
         Steps,
-        Supplier,
-        Method,
-        Map,
+        Prepare,
         Skip,
         Split,
         Sift,
