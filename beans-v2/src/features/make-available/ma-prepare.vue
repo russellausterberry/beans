@@ -38,27 +38,69 @@
             </div>
 
             <!-- choose whether to set up mapping -->
+            <div v-if="fileChosen" class="columns">
+                <p class="column is-half">Set up file mapping?</p>
+                <div class="column is-half">
+                    <input type="checkbox" 
+                        id="toMap"
+                        v-model="toMap">
+                </div>
+            </div>
         </div>
         <div class="column is-2"></div>                  
     </div>
 
     <!-- map fields to import -->
-    <div v-if="fileChosen">
+    <div v-if="toMap">
+        <br>
+        <br>
+        <div class="columns has-text-left">
+            <div class="column is-2"></div>
+            <div class="column">
+                <p class="subtitle">downloaded field/s mapped to...</p>
+            </div>
+            <div class="column is-2">
+                <p class="subtitle">import fields</p>
+                <font-awesome-icon icon="minus-circle"
+                    class="warning"
+                    @click="clearMappedFields()" />
+                <span> Clear all mapped fields</span>
+            </div>
+            <div class="column is-2"></div>
+        </div>
         <div v-for="(field, index) in mappedFields"
-            :key="field[0]">
+            :key="field[0]"
+            class="columns has-text-left">
+            <div class="column is-2"></div>   
             <vue-multi-select
                 v-model="mappedFields[index][1]"
-                :options="csvColumns">
+                :options="csvColumns"
+                class="column">
             </vue-multi-select>
-            <span>{{ field[0] }}</span>                            
+            <div class="column is-1">{{ field[0] }}</div>    
+            <!-- TODO: add deletable tags for each item in mappedFields -->
+            <div class="column is-2">
+                <span v-for="item in field[1]"
+                    :key="item"
+                    class="tag">
+                        {{ item }}
+                </span>
+            </div>
+            <div class="column is-2"></div>        
         </div>
-
     </div>
 
-
-    <br>
-    <br>
-
+    <!-- show 'NEXT' icon -->
+    <div v-if="chosenMethod === 'manually' || fileChosen">
+        <br>
+        <br>
+        <hr>
+        <br>
+        <span><p class="subtitle">Next</p></span>
+        <font-awesome-icon icon="arrow-circle-right"
+            class="fa-2x nav-guide"
+            @click="next(currentStep)" />
+    </div>
 
 </div>
 </template>
@@ -75,31 +117,19 @@ export default {
                 "Gabrielle Austerberry",
                 "Carol Blight"
             ],
-            availability: {},
             chosenSupplier: '',
             deliveryDate: '',
             chosenMethod: '',
-            showColumns: false,
             fileChosen: false,
-            dragging: null,
-            over: false,
-            productFields: [
-
-                'product',
-                'unit',
-                'unitPrice',
-                'gst',
-                'producer'
-            ],
+            toMap: false,
+            isComplete: false,
             mappedFields: [
 
-                ['product', []],
-                ['unit', ['french fries', 'potato chips']],
-                ['unitPrice', ['unify']],
+                ['product', ['name', 'description']],
+                ['unit', []],
+                ['unitPrice', []],
                 ['gst', []],
-                ['producer', []],
-                ['supplier', []],
-                ['deliveryDate', []]
+                ['producer', []]
             ]
         };
     },
@@ -122,6 +152,15 @@ export default {
              
                 }
             });
+        },
+        clearMappedFields() {
+            this.mappedFields = [
+                ['product', []],
+                ['unit', []],
+                ['unitPrice', []],
+                ['gst', []],
+                ['producer', []]                
+            ]
         },
         handleDrop(data) {
             console.log('data ' + JSON.stringify(data.col))
@@ -147,10 +186,16 @@ export default {
 </script>
 
 <style scoped>
-    .to-map {
-        text-align: left;
-        font-weight: bold;
-    }
+    hr {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: .5em;
+        margin-bottom: 1em;
+        border-style: inset;
+        border-width: 1px;
+        color: lightgray;
+    }  
 
     .dropster {
         width: 60%;
@@ -160,4 +205,22 @@ export default {
         border-color: #aaa;
         background: #ccc;
     }
+
+    .nav-guide {
+        color: skyblue;
+    }
+
+    .nav-dormant {
+        color: lightgrey;
+    }
+
+    .to-map {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .warning {
+        color: tomato;
+    }
+  
 </style>
