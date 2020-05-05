@@ -1,0 +1,7 @@
+// customise variables here
+$steps-active-color: orange;
+$steps-completed-color: lightblue;
+
+@import "bulma";
+@import "node_modules/bulma-extensions/bulma-steps/src/sass/index.sass";
+@import "node_modules/bulma-o-steps/bulma-steps.scss"

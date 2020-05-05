@@ -74,22 +74,6 @@
         </div>
 
         <!-- display mappings -->
-
-
-
-
-
-
-        <!-- REDO this display module \/\/\/-->
-        <!-- 
-            In 2.6+, v-for can also work on values that implement the Iterable Protocol, including native Map and Set. However, it should be noted that Vue 2.x currently does not support reactivity on Map and Set values, so cannot automatically detect changes.
-         -->
-
-
-
-
-
-
         <div v-for="line in mappedFields"
             :key="line"
             class="columns has-text-left">
@@ -117,8 +101,7 @@
             <div class="column is-2">
                 <div>
                     <font-awesome-icon icon="save"
-                        class="action"
-                        @click="updatePreLists()" />
+                        class="action" />
                     <span> Update mappings</span>                        
                 </div>
             </div>
@@ -143,123 +126,109 @@
 </template>
 
 <script >
+import { prep } from './prepareAvailability'
 
 export default {
-    data: function () {
-        return {
-            suppliers: [
-                "Food Connect",
-                "Sovereign Foods",
-                "Mt Cotton Organic Farm",
-                "Gabrielle Austerberry",
-                "Carol Blight"
-            ],
-            chosenSupplier: '',
-            supplierPreListIndex: -1,
-            orderDate: '',
-            chosenMethod: '',
-            fileChosen: false,
-            toMap: false,
-            isComplete: false,
-            mappedFields: new Map(
-                ('product', []),
-                ('unit', []),
-                ('unitPrice', []),
-                ('gst', []),
-                ('producer', [])               
-            )
-        };
-    },
-    methods: {
-        // read the chosen .csv file into a JSON structure
-        readFile() {
+    setup() {
+        const {
+            chosenSupplier,             // global
+            supplierPreListIndex,
+            orderDate,                  // global
+            chosenMethod,
+            fileChosen,
+            fileData,
+            toMap,
+            isComplete,
+            suppliers,                  // global
+            mappedFields,
+            setChosenSupplier,
+            setSupplierPreListIndex,
+            setOrderDate,
+            setChosenMethod,
+            setFileChosen,
+            setFileData,
+            setToMap,
+            setIsComplete,
+            setMappedField,
+            clearMappedFields
+        } = prep()
+
+        function readFile() {
             var file = event.target.files[0];
-            var self = this;
-            
-            this.$papa.parse(file, {    // config object, containing callback
+            this.$papa.parse(file, {        // config object, containing callback
                 header: true,
-                complete: function (results) {      // callback to execute when parsing completed
+                complete: function (results) {    // callback to execute when parsing completed
                     const payload = {
                         fields: results.meta.fields,
                         all: results
                     }
-
-                    self.$store.dispatch('importCSV', payload); 
-                    self.fileChosen = true;
-             
+                    setFileData(payload); 
+                    setFileChosen(true)
                 }
             });
-        },
-        clearMappedFields() {
-            this.mappedFields.forEach((value, key, array) => {
-                value=[]
-                array.set(key, value)
-            })
-        },
-        handleDrop(data) {
-            console.log('data ' + JSON.stringify(data.col))
-        },
-        updatePreLists() {
-            console.log('entered updatePreLists()')
-
-
-            const payload = {
-                supplier: this.chosenSupplier,
-                mapped: this.mappedItems,
-            }
-
-            this.$store.dispatch('updatePreLists', payload)
         }
-    },
-    computed: {
-        csvItems () {
-            return this.$store.state.csvItems;
-        },
-        csvColumns: {
-            get() {
-                return this.$store.getters.csvColumns;
-            },
-            set(value) {
-                this.$store.dispatch('updateCsvColumns', value)
-            }            
-        },
-        supplierPreLists: {
-            get() {
-                return this.$store.getters.supplierPreLists
-            }
-        },
-    },
-    watch: {
-        chosenSupplier() {
-            if (this.chosenSupplier) {
-                // update supplier index
 
-                let cs = this.chosenSupplier
-                let p = this.supplierPreLists
-                let index = this.supplierPreListIndex
-                // find index
-                p.some(function(v, i) {
-                    if (v.supplierPreList.supplier === cs) {
-                        index = i
-                        return true
-                    }
-                })
-                this.supplierPreListIndex = index
-
-                // update supplier mapping 
-                if (index > -1) {
-                    let spl = this.supplierPreLists[index].supplierPreList.mapping
-                    this.mappedFields = new Map(Object.entries(spl))                     
-                }               
-
-            } else {
-                // clear supplier mapping
-                this.supplierPreListIndex = -1
-                this.clearMappedFields()
-            }
+        return {
+            chosenSupplier,
+            supplierPreListIndex,
+            orderDate,
+            chosenMethod,
+            fileChosen,
+            fileData,
+            toMap,
+            isComplete,
+            suppliers,
+            mappedFields,
+            setChosenSupplier,
+            setSupplierPreListIndex,
+            setOrderDate,
+            setChosenMethod,
+            setFileChosen,
+            setFileData,
+            setToMap,
+            setIsComplete,
+            setMappedField,
+            clearMappedFields,
+            readFile
         }
     }
-};
+
+
+
+
+
+
+    // watch: {
+    //     chosenSupplier() {
+    //         if (this.chosenSupplier) {
+    //             // update supplier index
+
+    //             let cs = this.chosenSupplier
+    //             let p = this.supplierPreLists
+    //             let index = this.supplierPreListIndex
+    //             // find index
+    //             p.some(function(v, i) {
+    //                 if (v.supplierPreList.supplier === cs) {
+    //                     index = i
+    //                     return true
+    //                 }
+    //             })
+    //             this.supplierPreListIndex = index
+
+    //             // update supplier mapping 
+    //             if (index > -1) {
+    //                 let spl = this.supplierPreLists[index].supplierPreList.mapping
+    //                 this.mappedFields = new Map(Object.entries(spl))                     
+    //             }               
+
+    //         } else {
+    //             // clear supplier mapping
+    //             this.supplierPreListIndex = -1
+    //             this.clearMappedFields()
+    //         }
+    //     }
+    // }
+}
 </script>
 
 <style scoped>
