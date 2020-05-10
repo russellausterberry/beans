@@ -9,11 +9,11 @@
 
         <keep-alive>
             <!-- show relevant step -->
-            <!-- 'else' block to work around currentComponent being intially undefined -->
             <component v-if="currentComponent"
                 :is="currentComponent">Now in component: {{ currentComponent }}</component>
+            <!-- work-around for currentComponent being intially undefined -->    
             <component v-else
-                :is="'Prepare'">hello</component>
+                :is="'Prepare'"></component>
         </keep-alive>
     </div>
 </template>
