@@ -7,13 +7,12 @@ import { createContainer } from 'vue-unstated'
 import Papa from 'papaparse'
 
 const usePrep = (initialState = {
-    prep: {
-            orderDate: '',
-            chosenSupplier: '',
-            chosenMethod: '',
-            fileChosen: '',
-            toMap: false
-        },
+
+        orderDate: '',
+        chosenSupplier: '',
+        chosenMethod: '',
+        fileChosen: '',
+        toMap: false,
 
         // column headers and all content of imported availability file
         fileData: {
@@ -40,7 +39,7 @@ const usePrep = (initialState = {
                 complete: function (results) { // callback to execute when parsing completed
                     prepState.fileData.cols = results.meta.fields
                     prepState.fileData.all = results
-                    prepState.prep.fileChosen = file.name
+                    prepState.fileChosen = file.name
                 }
             })
         }

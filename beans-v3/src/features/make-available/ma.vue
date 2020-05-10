@@ -4,19 +4,22 @@
     <div>
         <transition name="steps" appear>
             <!-- 'Steps' bar tracks which step is currently active -->
-            <Steps @currentStepChanged="currentComponent=$event"></Steps>
+            <Steps></Steps>
         </transition>
 
         <keep-alive>
             <!-- show relevant step -->
-            <component :is="currentComponent"></component>
+            <!-- 'else' block to work around currentComponent being intially undefined -->
+            <component v-if="currentComponent"
+                :is="currentComponent">Now in component: {{ currentComponent }}</component>
+            <component v-else
+                :is="'Prepare'">hello</component>
         </keep-alive>
     </div>
 </template>
 
 <script>
-import { stepsContainer } from './useStepsUnstated'
-
+// import components
 // manual check: each component should match 'step name' in steps data
 import Steps from "./ma-steps"
 import Prepare from "./ma-prepare"
@@ -24,6 +27,10 @@ import Skip from "./ma-skip"
 import Split from "./ma-split"
 import Sift from "./ma-sift"
 import Cull from "./ma-cull"
+
+// import stores
+import { stepsContainer } from '../../stores/make-available/steps'
+import { computed } from '@vue/composition-api'
 
 export default {
     components: {
@@ -35,13 +42,26 @@ export default {
         Cull
     },
     setup() {
+
         const { stepState } = stepsContainer.provide()
 
         return {
-            currentComponent: stepState.currentComponent
+            currentComponent:   computed({
+                get: () => stepState.currentComponent,
+                set: newVal => { stepState.currentComponent = newVal }
+            })
         }
     }
-};
+    
+
+/* TODO - find how to get/set currentComponent & use in another method */
+
+    // data: function() {
+    //     return {
+    //         currentComponent: "Prepare"
+    //     }
+    // }
+}
 </script>
 
 <style scoped>

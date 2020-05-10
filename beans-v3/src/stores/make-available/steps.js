@@ -2,54 +2,62 @@
 // https://www.npmjs.com/package/vue-unstated
 
 
-import { reactive, watch } from "@vue/composition-api"
+import { reactive, watch } from '@vue/composition-api'
 import { createContainer } from 'vue-unstated'
 
 const useSteps = (initialState = {
 
     // data for each step of updating supplier availabilities 
     currentStep: 1,                 // 1 correlates to step 1, etc
-    currentComponent: "Prepare",    // assume step name matches component name
+    currentComponent: 'Prepare',    // assume step name matches component name
     stepsVisible: true,             // controls visibility of entire steps component
     steps: [                        // data for each of the steps...
         {
             details: {
                 stepMarker: 1,
-                stepName: "Prepare",
+                stepName: 'Prepare',
                 stepActive: true,
-                stepInfo: "Prepare to make available from a supplier"
+                stepInfo: 'Prepare to make available from a supplier'
             }
         },
         {
             details: {
                 stepMarker: 2,
-                stepName: "Skip",
+                stepName: 'Map',
                 stepActive: false,
-                stepInfo: "If needed select which items to skip by default"
+                stepInfo: 'Map csv columns to native import fields'
             }
         },
         {
             details: {
                 stepMarker: 3,
-                stepName: "Split",
+                stepName: 'Skip',
                 stepActive: false,
-                stepInfo: "Drag the words of each item into relevant box"
+                stepInfo: 'If needed select which items to skip by default'
             }
         },
         {
             details: {
                 stepMarker: 4,
-                stepName: "Sift",
+                stepName: 'Split',
                 stepActive: false,
-                stepInfo: "Add categories"
+                stepInfo: 'Drag the words of each item into relevant box'
             }
         },
         {
             details: {
                 stepMarker: 5,
-                stepName: "Cull",
+                stepName: 'Sift',
                 stepActive: false,
-                stepInfo: "Do a final comparison and uncheck any items you wish to cull"
+                stepInfo: 'Add categories'
+            }
+        },
+        {
+            details: {
+                stepMarker: 6,
+                stepName: 'Cull',
+                stepActive: false,
+                stepInfo: 'Do a final comparison and uncheck any items you wish to cull'
             }
         }
     ]
@@ -63,7 +71,9 @@ const useSteps = (initialState = {
             const i = position - 1           // translate 'position' to 0-based index for array
             stepState.steps[i].details.stepActive = false
             stepState.steps[i + 1].details.stepActive = true
-            stepState.currentStep.value++
+            stepState.currentComponent = stepState.steps[i + 1].details.stepName
+            stepState.currentStep++
+            
         }
     }
     // move to previous step
@@ -72,8 +82,13 @@ const useSteps = (initialState = {
             const i = position - 1           // translate 'position' to 0-based index for array
             stepState.steps[i].details.stepActive = false
             stepState.steps[i - 1].details.stepActive = true
-            stepState.currentStep.value--
+            stepState.currentComponent = stepState.steps[i - 1].details.stepName
+            stepState.currentStep--
         }
+    }
+
+    const toggleStepsVisible = () => {
+        stepState.stepsVisible = !stepState.stepsVisible
     }
 
     // watch pattern from documentation:
@@ -86,7 +101,8 @@ const useSteps = (initialState = {
     return {
         stepState,
         next,
-        previous
+        previous,
+        toggleStepsVisible
     }    
 }
 

@@ -4,6 +4,7 @@ import VueCompositionApi from "@vue/composition-api"
 import App from './App'
 import VueRouter from 'vue-router'
 import PouchDB from 'pouchdb'
+import vSelect from 'vue-select'
 import VueSingleSelect from 'vue-single-select'
 import VueMultiSelect from 'vue-simple-multi-select'
 
@@ -12,7 +13,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Datetime } from 'vue-datetime'
+import { CoolSelectPlugin } from 'vue-cool-select'
+
+// import css files
 import 'vue-datetime/dist/vue-datetime.css'
+import 'vue-cool-select/dist/themes/material-design.css'
 
 library.add( fas )
 
@@ -38,6 +43,7 @@ var remote_CF_invoices  = couchPath + 'CF_invoices'
 
 Vue.config.productionTip = false
 
+Vue.component('v-select', vSelect)
 Vue.component('vue-single-select', VueSingleSelect)
 Vue.component('vue-multi-select', VueMultiSelect)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -45,6 +51,7 @@ Vue.component('datetime', Datetime)
 
 Vue.use(VueRouter)
 Vue.use(VueCompositionApi)
+Vue.use(CoolSelectPlugin)
 
 require("./assets/main.scss")
 

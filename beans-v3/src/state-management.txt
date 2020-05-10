@@ -1,0 +1,101 @@
+Beans utilises vue-unstated library for state management, which in turn requires the composition api.
+This combination was chosen as a lighter alternative to Vuex which also bundles state and state logic together in components.
+
+Vue-unstated documentation: https://www.npmjs.com/package/vue-unstated
+
+
+
+==========================================================================================================
+
+State management file structure consists of .js files mostly corresponding to the vue components, as below
+
+src 
+|---stores
+|   |---global
+|   |   |---(state 1)
+|   |   |---(state 2)
+|   |---make-available
+|   |   |---steps
+|   |   |---prepare
+|   |   |---[etc etc]
+|   |---adjust-orders
+|   |   |---[etc etc]
+
+
+
+==========================================================================================================
+These .js 'store' files are imported as needed into each Vue component.
+Each 'store' file contains initial data structure followed by mutation methods in the following pattern:
+
+
+    import { createContainer } from 'vue-unstated'
+    import { reactive } from '@vue/composition-api'
+
+        const useSteps = (initialState = {
+            --- actual data & properties ---
+        }) => {
+            const state = reactive(initialState)
+
+            --- constants declared as mutation functions f1 f2 etc ---
+
+            return( state, fn1, fn2 )
+        }
+
+    export const stepsContainer = createContainer(useSteps)
+
+
+
+==========================================================================================================
+A store file is imported into a Vue component and MADE AVAILABLE FOR CHILD COMPONENTS as below:
+
+    <script>
+    // import Vue components
+    import Steps from './Steps'
+
+    // import store components
+    import stepsContainer from '../store/make-available/steps'
+
+    export default {
+        components: {
+            Steps
+        },
+        setup() {
+            stepsContainer.provide()
+        }
+    }
+    </script>
+
+
+
+==========================================================================================================
+A store file is imported into a child Vue component as follows   :
+
+    <script>
+        import stepsContainer from '../store/make-available/steps'
+
+        export default {
+            setup() {
+                // initialise all properties (data or methods)
+                const {
+                    stepState,
+                    currentComponent,
+                    currentStep,
+                    stepsVisible,
+                    steps,
+                    next,
+                    previous
+                } = stepsContainer.useContainer()
+
+                // make said properties available in template
+                return {
+                    stepState,
+                    currentComponent,
+                    currentStep,
+                    stepsVisible,
+                    steps,
+                    next,
+                    previous
+                }
+            }
+        }
+    </script>

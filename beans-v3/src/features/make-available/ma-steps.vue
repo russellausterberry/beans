@@ -3,13 +3,13 @@
         <div v-show="stepsVisible">
             <font-awesome-icon icon="chevron-up"
                 class="fa-2x nav-guide"
-                @click="stepsVisible=!stepsVisible" />
+                @click="toggleStepsVisible" />
             <br>
         </div>
         <div v-show="!stepsVisible">
             <font-awesome-icon icon="chevron-down"
                 class="fa-2x nav-guide"
-                @click="stepsVisible=!stepsVisible" />
+                @click="toggleStepsVisible" />
         </div>  
 
         <!-- 'make available' steps progress bar -->
@@ -58,28 +58,25 @@
 
 
 <script>
-import stepsContainer from './useStepsUnstated'
+import { stepsContainer } from '../../stores/make-available/steps'
+import { computed } from '@vue/composition-api'
 
 export default {
     setup() {
         const {
             stepState,
-            currentComponent,
-            currentStep,
-            stepsVisible,
-            steps,
             next,
-            previous
+            previous,
+            toggleStepsVisible
         } = stepsContainer.useContainer()
 
         return {
-            stepState,
-            currentComponent,
-            currentStep,
-            stepsVisible,
-            steps,
+            currentStep:    computed(() => stepState.currentStep),
+            stepsVisible:   computed(() => stepState.stepsVisible),
+            steps:          computed(() => stepState.steps),
             next,
-            previous
+            previous,
+            toggleStepsVisible
         }
     }
 }

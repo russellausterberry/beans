@@ -14,36 +14,37 @@
             <!-- choose supplier -->
             <div v-if="orderDate" class="columns">
                 <p class="column is-half">Choose a supplier to set availability for</p>
-                <vue-single-select v-model="chosenSupplier"
-                    :options="suppliers"
+
+                <cool-select v-model="chosenSupplier"
+                    :items="suppliers"
                     class="column is-half">
-                </vue-single-select>    
+                </cool-select>    
             </div>
 
 
             <!-- choose method -->
             <div v-if="chosenSupplier" class="columns">
                 <p class="column is-half">Select how to set availability</p>
-                <vue-single-select v-model="chosenMethod"
-                    :options="['from csv', 'manually']"
+                <cool-select v-model="chosenMethod"
+                    :items="['from csv', 'manually']"
                     class="column is-half">
-                </vue-single-select>                
+                </cool-select>                
             </div>            
 
             <!-- choose file -->
-            <div v-if="prep.chosenMethod=='from csv'" class="columns">
+            <div v-if="chosenMethod=='from csv'" class="columns">
                 <p class="column is-half">Choose a file to upload</p>
                 <input type="file" @change="readFile" class="column is-half"/>
                 <br>
             </div>
 
             <!-- choose whether to set up mapping -->
-            <div v-if="prep.fileChosen" class="columns">
+            <div v-if="fileChosen" class="columns">
                 <p class="column is-half">Set up file mapping?</p>
                 <div class="column is-half">
                     <input type="checkbox" 
                         id="toMap"
-                        v-model="prep.toMap">
+                        v-model="toMap">
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
     </div>
 
     <!-- show 'NEXT' icon -->
-    <div v-if="prep.chosenMethod === 'manually' || prep.fileChosen">
+    <div v-if="chosenMethod === 'manually' || fileChosen">
         <br>
         <br>
         <hr>
@@ -68,23 +69,55 @@
 </template>
 
 <script>
-import { stepsContainer } from './useStepsUnstated'
-import { prepContainer } from './usePrepUnstated'
+// import stores
+import { stepsContainer } from '../../stores/make-available/steps'
+import { prepContainer } from '../../stores/make-available/prep'
+import { computed } from '@vue/composition-api'
+import { CoolSelect } from 'vue-cool-select'
 
 export default {
+    components: { CoolSelect },
     setup() {
-        const { stepState, next } = stepsContainer.useContainer()
-        const { prepState, readFile } = prepContainer.useContainer()
+        const { next, stepState } = stepsContainer.useContainer()
+        const { prepState, readFile } = prepContainer.provide()
 
         return {
-            orderDate: prepState.orderDate,
-            chosenSupplier: prepState.chosenSupplier,
-            chosenMethod: prepState.chosenMethod,
-            toMap: prepState.toMap,
-            suppliers: prepState.suppliers,
-            readFile,
-            currentStep: stepState.currentStep,
-            next
+            orderDate:          computed({
+                get: () => prepState.orderDate,
+                set: newVal => { prepState.orderDate = newVal}
+            }),
+            chosenSupplier:     computed({
+                get: () => prepState.chosenSupplier,
+                set: newVal => { prepState.chosenSupplier = newVal}
+            }),
+            chosenMethod:       computed({
+                get: () => prepState.chosenMethod,
+                set: newVal => { prepState.chosenMethod = newVal}
+            }),
+            fileChosen:         computed({
+                get: () => prepState.fileChosen,
+                set: newVal => { prepState.fileChosen = newVal}
+            }),
+            toMap:              computed({
+                get: () => prepState.toMap,
+                set: newVal => { prepState.toMap = newVal}
+            }),
+            currentStep:        computed({
+                get: () => stepState.currentStep,
+                set: newVal => { stepState.currentStep = newVal}
+            }),
+            currentComponent:   computed({
+                get: () => stepState.currentComponent,
+                set: newVal => { stepState.currentComponent = newVal }
+            }),
+            suppliers:          computed(() => prepState.suppliers),
+
+            nextStep(s,c) {
+                console.log(s)
+                console.log(c)
+            },
+            next,
+            readFile
         }
     }
 }
