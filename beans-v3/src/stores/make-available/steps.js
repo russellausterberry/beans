@@ -23,14 +23,6 @@ const useSteps = (initialState = {
         {
             details: {
                 stepMarker: 2,
-                stepName: 'Map',
-                stepActive: false,
-                stepInfo: 'Map csv columns to native import fields'
-            }
-        },
-        {
-            details: {
-                stepMarker: 3,
                 stepName: 'Skip',
                 stepActive: false,
                 stepInfo: 'If needed select which items to skip by default'
@@ -38,7 +30,7 @@ const useSteps = (initialState = {
         },
         {
             details: {
-                stepMarker: 4,
+                stepMarker: 3,
                 stepName: 'Split',
                 stepActive: false,
                 stepInfo: 'Drag the words of each item into relevant box'
@@ -46,7 +38,7 @@ const useSteps = (initialState = {
         },
         {
             details: {
-                stepMarker: 5,
+                stepMarker: 4,
                 stepName: 'Sift',
                 stepActive: false,
                 stepInfo: 'Add categories'
@@ -54,7 +46,7 @@ const useSteps = (initialState = {
         },
         {
             details: {
-                stepMarker: 6,
+                stepMarker: 5,
                 stepName: 'Cull',
                 stepActive: false,
                 stepInfo: 'Do a final comparison and uncheck any items you wish to cull'

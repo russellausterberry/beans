@@ -2,68 +2,67 @@
 <div>
     <h3>Map fields</h3>
     <!-- map fields to import -->
-    <div v-if="toMap">
-        <br>
-        <br>
 
-        <!-- display headings --> 
-        <div class="columns has-text-left">
-            <div class="column is-2"></div>
-            <div class="column">
-                <p class="subtitle">downloaded field/s mapped to...</p>
-            </div>
-            <div class="column is-2">
-                <p class="subtitle">import fields</p>
-                <div>
-                    <font-awesome-icon icon="minus-circle"
-                        class="warning"
-                        @click="clearMappedFields()" />
-                    <span> Clear all mapped fields</span>                    
-                </div>
-            </div>
-            <div class="column is-2"></div>
+    <!-- display headings in following column layout: --> 
+    <!-- |1 1|2 2|3 3 3 3 3 3|4 4| -->    
+    <div class="columns has-text-left">
+        <div class="column is-2"></div>
+        <div class="column">
+            <p class="subtitle">downloaded field/s mapped to...</p>
         </div>
+        <div class="column is-2">
+        </div>
+        <div class="column is-2">
+            <p class="subtitle">import fields</p>
+        </div>
+    </div>
 
-        <!-- display mappings -->
-        <div v-for="line in mappedFields"
-            :key="line"
-            class="columns has-text-left">
-            <div class="column is-2"></div>   
+    <!-- display mappings in following column layout: --> 
+    <!-- |1 1|2 2 2 2 2|3|4 4|5 5| -->   
+    <div v-for="(line) in initialFields"
+        :key="line[0][0]"
+        class="columns has-text-left">
+        <div class="column is-2"></div>
+        <div class="column is-1">
+            <strong>{{ line[0][0] }}</strong>   
+        </div>  
+        <div class="column">
             <vue-multi-select
+                placeholder="choose which imported column/s to map to field"
                 v-model="line[1]"
                 :options="csvColumns"
                 class="column">
-            </vue-multi-select>
-            <div class="column is-1">{{ line[0] }}</div>    
-            <div class="column is-2">
-                <span v-for="item in line[1]"
-                    :key="item"
-                    class="tag">
-                        {{ item }}
-                </span>
-            </div>
-            <div class="column is-2"></div>        
+            </vue-multi-select>            
         </div>
-
-        <!-- button for 'save' -->
-        <div class="columns has-text-left">
-            <div class="column is-2"></div>
-            <div class="column"></div>
-            <div class="column is-2">
-                <div>
-                    <font-awesome-icon icon="save"
-                        class="action" />
-                    <span> Update mappings</span>                        
-                </div>
-            </div>
-            <div class="column is-2"></div>
-        </div>        
+        <div class="column is-2">
+            <span v-for="item in line[1]"
+                :key="item"
+                class="tag">
+                    {{ item }}
+            </span>
+        </div>       
     </div>
+    <div class="column is-2">  
+    </div> 
 </div>
 </template>
 
 <script>
+import { prepContainer } from '../../stores/make-available/prep'
+import { computed } from '@vue/composition-api'
+import VueMultiSelect from 'vue-simple-multi-select'
 
+export default {
+    components: { VueMultiSelect },
+    setup() {
+        const { prepState } = prepContainer.useContainer()
+
+        return {
+            initialFields: computed(() => prepState.initialFields),
+            csvColumns: computed(() => prepState.fileData.cols)
+        }
+    }
+}
 
 
 

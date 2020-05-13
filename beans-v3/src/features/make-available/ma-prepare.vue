@@ -6,14 +6,14 @@
 
             <!-- choose order date -->
             <div class="columns">
-                <p class="column is-half">Choose date for next order or packing night</p>
+                <p class="column is-half">Next order date</p>
                 <datetime v-model="orderDate" class="column is-half"></datetime>
                 <br>                          
             </div>
         
             <!-- choose supplier -->
             <div v-if="orderDate" class="columns">
-                <p class="column is-half">Choose a supplier to set availability for</p>
+                <p class="column is-half">Choose supplier</p>
 
                 <cool-select v-model="chosenSupplier"
                     :items="suppliers"
@@ -24,7 +24,7 @@
 
             <!-- choose method -->
             <div v-if="chosenSupplier" class="columns">
-                <p class="column is-half">Select how to set availability</p>
+                <p class="column is-half">Select method</p>
                 <cool-select v-model="chosenMethod"
                     :items="['from csv', 'manually']"
                     class="column is-half">
@@ -33,14 +33,14 @@
 
             <!-- choose file -->
             <div v-if="chosenMethod=='from csv'" class="columns">
-                <p class="column is-half">Choose a file to upload</p>
+                <p class="column is-half">Choose a file</p>
                 <input type="file" @change="readFile" class="column is-half"/>
                 <br>
             </div>
 
             <!-- choose whether to set up mapping -->
             <div v-if="fileChosen" class="columns">
-                <p class="column is-half">Set up file mapping?</p>
+                <p class="column is-half">Set up mapping?</p>
                 <div class="column is-half">
                     <input type="checkbox" 
                         id="toMap"
@@ -51,10 +51,15 @@
         <div class="column is-2"></div>                  
     </div>
 
+
+    <!-- set up mapping -->
+    <div v-if="toMap === true">
+        <hr>
+        <mapping></mapping>
+    </div>
+
     <!-- show 'NEXT' icon -->
     <div v-if="chosenMethod === 'manually' || fileChosen">
-        <br>
-        <br>
         <hr>
         <br>
         <span><p class="subtitle">Next</p></span>
@@ -64,7 +69,6 @@
         <br>
         <br>
     </div>
-
 </div>
 </template>
 
@@ -74,9 +78,10 @@ import { stepsContainer } from '../../stores/make-available/steps'
 import { prepContainer } from '../../stores/make-available/prep'
 import { computed } from '@vue/composition-api'
 import { CoolSelect } from 'vue-cool-select'
+import Mapping from './ma-map'
 
 export default {
-    components: { CoolSelect },
+    components: { CoolSelect, Mapping },
     setup() {
         const { next, stepState } = stepsContainer.useContainer()
         const { prepState, readFile } = prepContainer.provide()
@@ -111,11 +116,6 @@ export default {
                 set: newVal => { stepState.currentComponent = newVal }
             }),
             suppliers:          computed(() => prepState.suppliers),
-
-            nextStep(s,c) {
-                console.log(s)
-                console.log(c)
-            },
             next,
             readFile
         }

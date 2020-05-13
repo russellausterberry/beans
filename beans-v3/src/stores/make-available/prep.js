@@ -8,9 +8,9 @@ import Papa from 'papaparse'
 
 const usePrep = (initialState = {
 
-        orderDate: '',
-        chosenSupplier: '',
-        chosenMethod: '',
+        orderDate: 'May 15, 2020',
+        chosenSupplier: 'Food Connect',
+        chosenMethod: 'from csv',
         fileChosen: '',
         toMap: false,
 
@@ -27,6 +27,13 @@ const usePrep = (initialState = {
             "Mt Cotton Organic Farm",
             "Gabrielle Austerberry",
             "Carol Blight"
+        ],
+        initialFields: [
+            [['product'], ['description', 'name']],
+            [['unit'], []],
+            [['unitPrice'], ['odious', 'monkey', 'breath']],
+            [['gst'], ['unitPrice']],
+            [['producer'], []]
         ]
     }) => {
         // encapsulate state
@@ -43,6 +50,16 @@ const usePrep = (initialState = {
                 }
             })
         }
+
+        // const clearMappings = () => {
+        //     console.log('in clearMappings')
+        //     const l = prepState.initialFields.length
+        //     for(let i = 0; i < l; i++) {
+        //         console.log('start: ' + prepState.initialFields[i][1])
+        //         prepState.initialFields[i][1] = []
+        //         console.log('end: ' + prepState.initialFields[i][1])
+        //     }
+        // }
 
         return { 
             prepState,
