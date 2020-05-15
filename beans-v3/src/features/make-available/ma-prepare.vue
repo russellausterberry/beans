@@ -119,7 +119,8 @@ export default {
             next,
             readFile
         }
-    }
+    },
+
 }
 
 </script>

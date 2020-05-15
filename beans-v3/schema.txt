@@ -99,7 +99,14 @@ invoices: {
 payments: {
     date: ...
     amount: $..
-    appliedTo: (invNbr ___ OR credit balance)    
+    appliedTo: (invNbr)    
+}
+mappings: {
+    product:
+    unit:
+    unitPrice:
+    gst:
+    producer:
 }
 
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -222,12 +229,5 @@ items: {
 ++++++++++++++++++++++++++++++++++++++++++++
 
 SUPPLIER-MAPPINGS
-_id
-supplier
-mapping:
-    product:
-    unit:
-    unitPrice:
-    gst:
-    producer:
+
 

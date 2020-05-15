@@ -30,7 +30,10 @@ import Cull from "./ma-cull"
 
 // import stores
 import { stepsContainer } from '../../stores/make-available/steps'
+import { dbs } from '../../database'
 import { computed } from '@vue/composition-api'
+
+
 
 export default {
     components: {
@@ -44,6 +47,27 @@ export default {
     setup() {
 
         const { stepState } = stepsContainer.provide()
+        var cf_Suppliers = dbs.cf_Suppliers
+        // var cfr_Suppliers = dbs.cfr_Suppliers
+        // var url = couchPath + 'cfr_Suppliers'
+
+        cf_Suppliers.put({
+                _id: 'mydoc99',
+                title: 'Heroes'
+            }).then(function () {
+                // handle response
+            }).catch(function (err) {
+                console.log(err);
+            })
+        
+        // cf_Suppliers.sync(url)
+
+        // cfr_Suppliers.get('mydoc').then(function (doc) {
+        //     console.log(doc)
+        // }). catch(function(err) {
+        //     console.log(err)
+        // })
+    
 
         return {
             currentComponent:   computed({
@@ -52,15 +76,6 @@ export default {
             })
         }
     }
-    
-
-/* TODO - find how to get/set currentComponent & use in another method */
-
-    // data: function() {
-    //     return {
-    //         currentComponent: "Prepare"
-    //     }
-    // }
 }
 </script>
 
