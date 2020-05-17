@@ -12,6 +12,7 @@ Vue.use(VueCompositionApi)
 import VueRouter from 'vue-router'
 import { routes } from './routes'
 Vue.use(VueRouter)
+const router = new VueRouter({ routes })
 
 // 'select' helpers
 // import vSelect from 'vue-select'
@@ -35,10 +36,8 @@ import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 Vue.component('datetime', Datetime)
 
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-})
+// enable CORS requests
+
 
 /* eslint-disable no-new */
 // showtime!

@@ -48,19 +48,19 @@ export default {
 
         const { stepState } = stepsContainer.provide()
         var cf_Suppliers = dbs.cf_Suppliers
-        // var cfr_Suppliers = dbs.cfr_Suppliers
-        // var url = couchPath + 'cfr_Suppliers'
+        var cfr_Suppliers = dbs.cfr_Suppliers
 
         cf_Suppliers.put({
-                _id: 'mydoc99',
-                title: 'Heroes'
-            }).then(function () {
-                // handle response
+                _id: '004',
+                title: 'Heroic'
+            }).then(function (response) {
+                console.log('success ' + response)
             }).catch(function (err) {
-                console.log(err);
+                console.log('error ' + err);
             })
         
-        // cf_Suppliers.sync(url)
+        cf_Suppliers.sync(cfr_Suppliers)
+        console.log('just synced - did that work?')
 
         // cfr_Suppliers.get('mydoc').then(function (doc) {
         //     console.log(doc)
