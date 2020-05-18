@@ -8,6 +8,31 @@ Vue.config.productionTip = false
 import VueCompositionApi from "@vue/composition-api"
 Vue.use(VueCompositionApi)
 
+// cors-anywhere proxy server to avoid CORS blocking
+// !!! TypeError .. createServer is not a function !!!
+// var host = process.env.HOST || '0.0.0.0'
+// var port = process.env.PORT || 8888
+
+// var cors_proxy = require('cors-anywhere')
+
+// cors_proxy.createServer({
+//   originWhiteList: ['http://localhost:5984'],
+//   requireHeader: ['origin', 'x-requested-with'],
+//   removeHeaders: ['cookie', 'cookie2']
+// }).listen(port, host, function() {
+//   console.log('Running CORS Anywhere on ' + host + ':' + port)
+// })
+
+// !!! Type Error: http.ServerResponse is undefined
+// const express = require('express')
+// const cors = require('cors')
+// const corsOptions = {
+//   origin: 'http://localhost:5984',
+//   optionsSuccessStatus: 200   // some legacy browsers can't handle 204
+// }
+// const app = express()
+// app.use(cors(corsOptions))
+
 // routing
 import VueRouter from 'vue-router'
 import { routes } from './routes'
@@ -35,9 +60,6 @@ library.add( fas )
 import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 Vue.component('datetime', Datetime)
-
-// enable CORS requests
-
 
 /* eslint-disable no-new */
 // showtime!

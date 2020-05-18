@@ -1,1 +1,4 @@
 // gitignore files
+
+# Local Netlify folder
+.netlify

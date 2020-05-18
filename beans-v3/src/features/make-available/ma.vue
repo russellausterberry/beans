@@ -51,8 +51,8 @@ export default {
         var cfr_Suppliers = dbs.cfr_Suppliers
 
         cf_Suppliers.put({
-                _id: '004',
-                title: 'Heroic'
+                _id: '0044',
+                title: 'Hedonic'
             }).then(function (response) {
                 console.log('success ' + response)
             }).catch(function (err) {

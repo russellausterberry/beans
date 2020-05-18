@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb';
 
-const couchPath = 'https://localhost:5984/'
+const couchPath = 'http://localhost:5984/'
 
 var dbs = {
     cf_Suppliers:   new PouchDB('cf_Suppliers'),
