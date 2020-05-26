@@ -6,6 +6,7 @@ import OrderSupplies from './features/order-supplies/os'
 import PrintSheets from './features/print-sheets/ps'
 import AdjustOrders from './features/adjust-orders/ao'
 import EnterPayments from './features/enter-payments/ep'
+import ManageDB from './features/admin/db/manageDB'
 
 // import Orders from './features/views/orders'
 // import Stock from './features/views/stock'
@@ -52,7 +53,20 @@ export const routes = [
           component: EnterPayments
         }
       ]
-    }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      components: {
+        header: Header
+      },
+      children: [
+        {
+          path: 'manage-db',
+          component: ManageDB
+        }
+      ]
+    }    
   ]
 
       // { path: '/orders', name:'Orders', component: Orders },

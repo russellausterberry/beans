@@ -38,6 +38,8 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">admin</a>
             <div class="navbar-dropdown">
+              <router-link :to="'/admin/manage-dbs'" class="navbar-item"></router-link>
+              <a class="navbar-item">manage dbs</a>
               <a class="navbar-item">orders</a>
               <a class="navbar-item">stock</a>
               <a class="navbar-item">suppliers</a>

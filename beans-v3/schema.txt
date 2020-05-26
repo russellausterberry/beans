@@ -10,12 +10,7 @@ taxonomies:
 suppliers: 
     [ array of supplier names ]
 groups
-    [ array of group names, each having:]
-        items
-        members
-        suppliers
-        orders
-        invoices
+    [ array of group names ]
 
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -227,7 +222,3 @@ items: {
 }
 
 ++++++++++++++++++++++++++++++++++++++++++++
-
-SUPPLIER-MAPPINGS
-
-
