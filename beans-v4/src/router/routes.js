@@ -1,12 +1,12 @@
-import Home from './shared/Home'
-import Header from './shared/Header'
-import OrderCycle from './features/OrderCycle'
-import Availability from './features/make-available/ma2'
-import Ordering from './features/order-supplies/os'
-import Printing from './features/print-sheets/ps'
-import Adjusting from './features/adjust-orders/ao'
-import Payments from './features/enter-payments/ep'
-import ManageDB from './features/admin/db/manageDB'
+import Home from '../views/Home'
+import Header from '../views/Header'
+import OrderCycle from '../components/order-cycle/OrderCycle'
+import MakeAvailable from '../components/order-cycle/make-available/MakeAvailable'
+import OrderSupplies from '../components/order-cycle/order-supplies'
+import PrintSheets from '../components/order-cycle/print-sheets/PrintSheets'
+import AdjustOrders from '../components/order-cycle/adjust-orders/AdjustOrders'
+import EnterPayments from '../components/order-cycle/enter-payments'
+import ManageDB from '../components/admin/ManageDB'
 
 // import Orders from './features/views/orders'
 // import Stock from './features/views/stock'
@@ -33,23 +33,23 @@ export const routes = [
       },
       children: [
         {
-          path: 'availability',
+          path: 'make-available',
           component: MakeAvailable
         },
         {
-          path: 'ordering',
+          path: 'order-supplies',
           component: OrderSupplies
         },
         {
-          path: 'printing',
+          path: 'print-sheets',
           component: PrintSheets
         },
         {
-          path: 'adjusting',
+          path: 'adjust-orders',
           component: AdjustOrders
         },
         {
-          path: 'payments',
+          path: 'enter-payments',
           component: EnterPayments
         }
       ]
