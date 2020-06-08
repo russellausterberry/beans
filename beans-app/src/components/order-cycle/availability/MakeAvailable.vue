@@ -9,11 +9,9 @@
 
         <keep-alive>
             <!-- show relevant step -->
-            <component v-if="currentComponent"
-                :is="currentComponent">Now in component: {{ currentComponent }}</component>
-            <!-- work-around for currentComponent being intially undefined -->    
-            <component v-else
-                :is="'Prepare'"></component>
+            <component :is="currentComponent">
+                Now in component: {{ currentComponent }}
+            </component>
         </keep-alive>
     </div>
 </template>
@@ -29,7 +27,7 @@ import Sift from './Sift'
 import Cull from './Cull'
 
 // import stores
-// import { stepsContainer } from '../../stores/make-available/steps'
+import { currentComponent } from './store/steps'
 // import { dbs } from '../../database'
 // import { computed } from '@vue/composition-api'
 
@@ -42,6 +40,12 @@ export default {
         Sift,
         Cull
     },
+    setup() {
+        return { currentComponent }
+    }
+
+
+
 /*     setup() {
 
         const { stepState } = stepsContainer.provide()
