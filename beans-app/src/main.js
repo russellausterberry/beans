@@ -14,6 +14,14 @@ const router = new VueRouter({
   routes
 })
 
+// icons
+import Unicon from 'vue-unicons'
+import { uniArrowLeft, uniArrowRight, uniSave, uniTimesSquare } from 'vue-unicons/src/icons'
+
+Unicon.add([uniArrowLeft, uniArrowRight, uniSave, uniTimesSquare])
+Vue.use(Unicon)
+
+//producton tip
 Vue.config.productionTip = false
 
 new Vue({

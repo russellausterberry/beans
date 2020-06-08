@@ -26,10 +26,7 @@ import Split from './Split'
 import Sift from './Sift'
 import Cull from './Cull'
 
-// import stores
 import { currentComponent } from './store/steps'
-// import { dbs } from '../../database'
-// import { computed } from '@vue/composition-api'
 
 export default {
     components: {

@@ -62,6 +62,10 @@ const stepsVisible = computed({
     get: () => stepsState._stepsVisible
 })
 
+const steps = computed({
+    get: () => stepsState._steps
+})
+
 const toggleStepsVisible = () => {
     stepsState._stepsVisible = !stepsState._stepsVisible
 }
@@ -92,6 +96,7 @@ export {  // export public functions which access private state
     currentIndex,
     currentComponent,
     stepsVisible,
+    steps,
     toggleStepsVisible,
     shiftStep
 }
